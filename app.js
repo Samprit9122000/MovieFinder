@@ -1,3 +1,4 @@
+
 const API_URL= "http://www.omdbapi.com/?apikey=ad92f34&s=";
 const API_URL_SEARCH="http://www.omdbapi.com/?apikey=ad92f34&i=";
 
@@ -13,7 +14,12 @@ document.getElementsByClassName("search")[0].addEventListener("click",function()
 });
 
 async function getMovies(url){
-    const resp=await fetch(url);
+    const resp=await fetch(url,{
+        mode: 'cors',
+        header: {
+            'Access-Control-Allow-Origin':'*'
+        }
+    });
     const respData= await resp.json();
     // console.log(respData);
     showMovies(respData.Search);
@@ -55,15 +61,3 @@ function movie_display(imovie){
     card.appendChild(movieElm);
 }
 
-// http://www.omdbapi.com/?i=tt3896198&apikey=ad92f34
-// http://www.omdbapi.com/?apikey=ad92f34
-
-
-//http://www.omdbapi.com/?apikey=ad92f34&s=     to search movie title
-
-//  <span class="movie-title"><b>Title: </b><span class="value">${imovie.Title}</span></span>
-
-{/* <span class="movie-title"><b>Rating: </b><span class="value">${imovie.imdbRating}</span></span>
-    <span class="movie-title"><b>Director: </b><span class="value">${imovie.Director}</span></span>
-    <span class="movie-title"><b>Released Date: </b><span class="value">${imovie.Released}</span></span>
-    <span class="movie-title"><b>Genre: </b><span class="value">${imovie.Genre}</span></span> */}
